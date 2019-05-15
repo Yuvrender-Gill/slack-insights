@@ -1,0 +1,14 @@
+{
+  "name": "slack-insights",
+  "version": "1.0.0",
+  "description": "Node app to interact with slack and analyize the slack data.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yuvrender Gill",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
+}
