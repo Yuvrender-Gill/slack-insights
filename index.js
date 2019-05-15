@@ -1,10 +1,10 @@
-require('dotenv').config() 
+
 var express = require('express')
 
 var app = express();
 
 
-var authorize = require('.routes/authorization');
+var authorize = require('./routes/authorization');
 // Call the authorize on the express;
 authorize(app);
 
