@@ -8,13 +8,11 @@ module.exports = function(app) {
 
         let teamName = req.params.id
 
-        console.log(teamName);
-
         let workplace = fs.readFileSync('./user_keys/' + teamName +  '.json');
         let oauthToken = JSON.parse(workplace).access_token;
-        slackExport.exportChannel(teamName, oauthToken);
-        console.log(teamName)
-        res.send(JSON.stringify(JSON.parse(workplace)));
-    });
+        let teamId = JSON.parse(workplace).team_id;
 
+        res.send(JSON.stringify(JSON.parse(workplace)));
+        slackExport.exportChannel(teamId, oauthToken);
+    });
 };

@@ -11,28 +11,28 @@ var
  * Finds the ID of the channel whose history is being exported, calls getChannelHistory on that channel
  * @param  {string} chanName - The name of the channel whose history is being exported
  */
-function exportChannel(teamName, token) {
+function exportChannel(teamId, token) {
   
-  var channelLookup = {};
-  var web = new slack(token);
-
+  let web = new slack(token);
   // Create a directory in the workplace_data for each separate team name.
-  mkdirp('./workplace_data/' + teamName, function(err) { 
+  mkdirp('./workplace_data/' + teamId, function(err) { 
     if (err) {
         console.log(err);
     }; 
   });
- 
+
   web.channels.list(function(err, info) {
+
     if (err) {
       console.log(err);
     } else {
       for (var i in info.channels) {
-        console.log(web.channels.list)
-        _getChannelHistory(teamName, token, info.channels[i].name, channelLookup[info.channels[i].name], 10000);
+        _getChannelHistory(teamId, token, info.channels[i].name, info.channels[i].id, 10000);
+      
       }
     }
   });
+
 };
 
 /**
@@ -41,13 +41,11 @@ function exportChannel(teamName, token) {
  * @param  {string} channel - The ID of the channel
  * @param  {Integer} count - The number of messages to export
  */
-function _getChannelHistory(teamName, token, chanName, channel, count) {
+function _getChannelHistory(teamId, token, chanName, channel, count) {
 
-    // var web = new slack(token);
-    console.log('done')
-    
+  var web = new slack(token);
 
-  var file = './workplace_data/' + teamName + '/' + chanName + '.json',
+  var file = './workplace_data/' + teamId + '/' + chanName + '.json',
       messageArray = [],
       userLookup = [],
       getChannelHistory = function() {
