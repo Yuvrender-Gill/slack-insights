@@ -5,8 +5,10 @@ var app = express();
 
 
 var authorize = require('./routes/authorization');
+var fetchData = require('./routes/fetchChannel');
 // Call the authorize on the express;
 authorize(app);
+fetchData(app);
 
 
 // Set a port number to run the server on. 
