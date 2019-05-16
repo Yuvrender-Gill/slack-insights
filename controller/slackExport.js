@@ -17,18 +17,17 @@ function exportChannel(teamId, token) {
   // Create a directory in the workplace_data for each separate team name.
   mkdirp('./workplace_data/' + teamId, function(err) { 
     if (err) {
-        console.log(err);
-    }; 
-  });
+        console.log(err)
+    }
+  })
 
-  web.channels.list(function(err, info) {
-
+  web.conversations.list({}, function(err, info) {
+    
     if (err) {
       console.log(err);
     } else {
       for (var i in info.channels) {
         _getChannelHistory(teamId, token, info.channels[i].name, info.channels[i].id, 10000);
-      
       }
     }
   });
